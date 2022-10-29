@@ -1,32 +1,35 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div>
+    <Header></Header>
+    <router-view></router-view>
+    <Footer v-show="$route.meta.show"></Footer>
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+export default {
+  name: 'App',
+  components: {
+    Header,
+    Footer
+  },
+  props: [],
+  data () {
+    return {}
+  },
+  computed: {},
+  watch: {},
+  created () {
+    // 派发一个action，避免多次网络请求
+    this.$store.dispatch('home/categoryList')
+  },
+  mounted () {},
+  methods: {}
 }
+</script>
 
-#nav {
-  padding: 30px;
+<style scoped lang='less'>
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
